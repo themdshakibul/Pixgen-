@@ -6,7 +6,7 @@ const AllPhotosPages = async () => {
 
   return (
     <section>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <div className="container mx-auto px-2 mt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {allPhotos.map((photo) => (
           <PhotCard key={photo.id} photo={photo} />
         ))}

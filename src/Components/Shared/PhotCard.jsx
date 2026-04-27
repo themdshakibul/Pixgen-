@@ -1,5 +1,6 @@
-import { Card, Chip } from "@heroui/react";
+import { Button, Card, Chip } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
 
@@ -20,7 +21,7 @@ const PhotCard = ({ photo }) => {
               {photo.category}
             </Chip>
           </div>
-          <h2>{photo.title}</h2>
+          <h2 className="text-xl font-semibold">{photo.title}</h2>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <FcLike />
@@ -31,6 +32,15 @@ const PhotCard = ({ photo }) => {
               <p>{photo.downloads}</p>
             </div>
           </div>
+          <Link href={`/all-photos/${photo.id}`}>
+            <Button
+              size="lg"
+              variant="primary"
+              className="w-full font-semibold"
+            >
+              View Promt
+            </Button>
+          </Link>
         </Card>
       </div>
     </section>
