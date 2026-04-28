@@ -4,7 +4,7 @@ import { authClient, useSession } from "@/lib/auth-client";
 import { Avatar } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { Button } from "@heroui/react";
 import { ArrowRightFromSquare, Gear } from "@gravity-ui/icons";
 import { Dropdown, Label } from "@heroui/react";
 
@@ -112,10 +112,14 @@ const Navbar = () => {
         ) : (
           <ul className="flex items-center text-sm gap-5">
             <li>
-              <Link href={"/auth/signup"}>SignUp</Link>
+              <Link href={"/auth/signup"}>
+                <Button>SignUp</Button>
+              </Link>
             </li>
             <li>
-              <Link href={"/auth/loging"}>SignIn</Link>
+              <Link href={"/auth/loging"}>
+                <Button>SignIn</Button>
+              </Link>
             </li>
           </ul>
         )}
