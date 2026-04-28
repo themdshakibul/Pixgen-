@@ -12,8 +12,6 @@ const Navbar = () => {
   const userData = useSession();
   const user = userData.data?.user;
 
-  console.log(user);
-
   return (
     <div className="border-b px-2">
       <nav className=" flex justify-between items-center  py-3 container mx-auto px-2 w-full">
@@ -60,7 +58,11 @@ const Navbar = () => {
             <Dropdown>
               <Dropdown.Trigger className="rounded-full">
                 <Avatar>
-                  <Avatar.Image alt={user?.image} src={user?.image} />
+                  <Avatar.Image
+                    alt={user?.image}
+                    src={user?.image}
+                    referrerPolicy="no-referrer"
+                  />
                   <Avatar.Fallback delayMs={600}>
                     {user.name.charAt(0)}
                   </Avatar.Fallback>
@@ -70,7 +72,11 @@ const Navbar = () => {
                 <div className="px-3 pt-3 pb-1">
                   <div className="flex items-center gap-2">
                     <Avatar size="sm">
-                      <Avatar.Image alt={user.naem} src={user?.image} />
+                      <Avatar.Image
+                        alt={user.naem}
+                        src={user?.image}
+                        referrerPolicy="no-referrer"
+                      />
                       <Avatar.Fallback delayMs={600}>
                         {user?.image}
                       </Avatar.Fallback>
