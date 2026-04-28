@@ -1,9 +1,19 @@
 "use client";
 
+import { authClient, useSession } from "@/lib/auth-client";
+import { Avatar } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { ArrowRightFromSquare, Gear, Persons } from "@gravity-ui/icons";
+import { Dropdown, Label } from "@heroui/react";
+
 const Navbar = () => {
+  const userData = useSession();
+  const user = userData.data?.user;
+
+  console.log(user);
+
   return (
     <div className="border-b px-2">
       <nav className=" flex justify-between items-center  py-3 container mx-auto px-2 w-full">
@@ -35,14 +45,75 @@ const Navbar = () => {
         </ul>
 
         <div className="flex gap-4">
-          <ul className="flex items-center text-sm gap-5">
-            <li>
-              <Link href={"/auth/signup"}>SignUp</Link>
-            </li>
-            <li>
-              <Link href={"/auth/loging"}>SignIn</Link>
-            </li>
-          </ul>
+          {!user && (
+            <ul className="flex items-center text-sm gap-5">
+              <li>
+                <Link href={"/auth/signup"}>SignUp</Link>
+              </li>
+              <li>
+                <Link href={"/auth/loging"}>SignIn</Link>
+              </li>
+            </ul>
+          )}
+
+          {user && (
+            <Dropdown>
+              <Dropdown.Trigger className="rounded-full">
+                <Avatar>
+                  <Avatar.Image alt={user?.image} src={user?.image} />
+                  <Avatar.Fallback delayMs={600}>
+                    {user.name.charAt(0)}
+                  </Avatar.Fallback>
+                </Avatar>
+              </Dropdown.Trigger>
+              <Dropdown.Popover>
+                <div className="px-3 pt-3 pb-1">
+                  <div className="flex items-center gap-2">
+                    <Avatar size="sm">
+                      <Avatar.Image alt={user.naem} src={user?.image} />
+                      <Avatar.Fallback delayMs={600}>
+                        {user?.image}
+                      </Avatar.Fallback>
+                    </Avatar>
+                    <div className="flex flex-col gap-0">
+                      <p className="text-sm leading-5 font-medium">
+                        {user?.name}
+                      </p>
+                      <p className="text-xs leading-none text-muted">
+                        {user?.email}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <Dropdown.Menu>
+                  <Dropdown.Item id="dashboard" textValue="Dashboard">
+                    <Label>Dashboard</Label>
+                  </Dropdown.Item>
+                  <Dropdown.Item id="profile" textValue="Profile">
+                    <Label>Profile</Label>
+                  </Dropdown.Item>
+                  <Dropdown.Item id="settings" textValue="Settings">
+                    <div className="flex w-full items-center justify-between gap-2">
+                      <Label>Settings</Label>
+                      <Gear className="size-3.5 text-muted" />
+                    </div>
+                  </Dropdown.Item>
+
+                  <Dropdown.Item
+                    id="logout"
+                    textValue="Logout"
+                    variant="danger"
+                    onClick={async () => await authClient.signOut()}
+                  >
+                    <div className="flex w-full items-center justify-between gap-2">
+                      <Label>Log Out</Label>
+                      <ArrowRightFromSquare className="size-3.5 text-danger" />
+                    </div>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown.Popover>
+            </Dropdown>
+          )}
         </div>
       </nav>
     </div>

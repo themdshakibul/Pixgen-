@@ -12,6 +12,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const LogingPage = () => {
   const onSubmit = async (e) => {
@@ -23,8 +24,18 @@ const LogingPage = () => {
       email: useData.email,
       password: useData.password,
     });
+  };
 
-    console.log(data, error);
+  const hadelGoogleSignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
+  const hadelGithubSignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "github",
+    });
   };
 
   return (
@@ -91,6 +102,25 @@ const LogingPage = () => {
               </Button>
             </div>
           </Form>
+          <div className="space-y-4">
+            <p className="text-center font-semibold">Or</p>
+            <Button
+              onClick={hadelGoogleSignIn}
+              size="lg"
+              variant="outline"
+              className="w-full"
+            >
+              <FaGoogle /> Sign In width Google
+            </Button>
+            <Button
+              onClick={hadelGithubSignIn}
+              size="lg"
+              variant="outline"
+              className="w-full"
+            >
+              <FaGithub /> Sign In width Github
+            </Button>
+          </div>
         </Card>
       </div>
     </section>

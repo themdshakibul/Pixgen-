@@ -29,8 +29,6 @@ const SignupPage = () => {
       password: useData.password,
     });
 
-    console.log(data, error);
-
     if (!error) {
       router.push("/");
     }
