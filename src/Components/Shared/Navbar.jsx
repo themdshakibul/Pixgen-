@@ -35,12 +35,12 @@ const Navbar = () => {
         </ul>
 
         <div className="flex gap-4">
-          <ul className="flex items-center  text-sm">
+          <ul className="flex items-center text-sm gap-5">
             <li>
-              <Link href={"/signup"}>SignUp</Link>
+              <Link href={"/auth/signup"}>SignUp</Link>
             </li>
             <li>
-              <Link href={"/signin"}>SignIn</Link>
+              <Link href={"/auth/loging"}>SignIn</Link>
             </li>
           </ul>
         </div>

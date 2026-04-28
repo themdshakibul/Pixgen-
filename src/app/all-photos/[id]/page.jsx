@@ -11,8 +11,9 @@ const PhotoDetailsPage = async ({ params }) => {
 
   return (
     <section>
-      <div>
-        <Card className="container mx-auto px-2 border border-gray-300 p-5 mt-10">
+      <div className="container mx-auto px-2">
+        <h2 className="text-3xl font-bold py-5">Promt Details</h2>
+        <Card className="border border-gray-300 p-5">
           <h2 className="text-2xl font-semibold">{title}</h2>
           <p className="font-semibold">{prompt}</p>
         </Card>
