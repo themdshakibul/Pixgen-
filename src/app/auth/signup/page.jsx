@@ -22,7 +22,7 @@ const SignupPage = () => {
     const formData = new FormData(e.currentTarget);
     const useData = Object.fromEntries(formData.entries());
 
-    await authClient.signIn.email(
+    await authClient.signUp.email(
       {
         name: useData.name,
         image: useData.image,
@@ -31,7 +31,7 @@ const SignupPage = () => {
         callbackURL: "/",
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           router.push("/");
           router.refresh();
         },

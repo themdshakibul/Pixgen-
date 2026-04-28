@@ -30,7 +30,7 @@ const LogingPage = () => {
         callbackURL: "/",
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           router.push("/");
           router.refresh();
         },
