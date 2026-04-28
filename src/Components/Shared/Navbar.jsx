@@ -5,33 +5,12 @@ import { Avatar } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArrowRightFromSquare, Gear } from "@gravity-ui/icons";
+import { ArrowRightFromSquare, Gear, Persons } from "@gravity-ui/icons";
 import { Dropdown, Label } from "@heroui/react";
-import { useRouter } from "next/navigation";
-import { logout } from "@/lib/Logout";
 
 const Navbar = () => {
-  const router = useRouter();
-
   const userData = useSession();
   const user = userData.data?.user;
-
-  const handelLogout = async () => {
-    await logout();
-    // await authClient.signOut();
-    // router.refresh();
-    // router.push("/auth/loging");
-
-    // await authClient.revokeSession({ token: "session-token" });
-
-    // await authClient.signOut({
-    //   fetchOptions: {
-    //     onSuccess: () => {
-    //       router.push("/");
-    //     },
-    //   },
-    // });
-  };
 
   return (
     <div className="border-b px-2">
@@ -130,7 +109,7 @@ const Navbar = () => {
                     id="logout"
                     textValue="Logout"
                     variant="danger"
-                    onClick={handelLogout}
+                    onClick={async () => await authClient.signOut()}
                   >
                     <div className="flex w-full items-center justify-between gap-2">
                       <Label>Log Out</Label>
