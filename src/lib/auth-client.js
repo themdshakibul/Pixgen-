@@ -4,4 +4,5 @@ export const authClient = createAuthClient({
   baseURL: "https://pixgen-pi.vercel.app",
 });
 
+
 export const { signIn, signUp, useSession } = createAuthClient();

@@ -11,6 +11,7 @@ import { Dropdown, Label } from "@heroui/react";
 const Navbar = () => {
   const userData = useSession();
   const user = userData.data?.user;
+  console.log(user);
 
   return (
     <div className="border-b px-2">

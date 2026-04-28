@@ -22,16 +22,24 @@ const SignupPage = () => {
     const formData = new FormData(e.currentTarget);
     const useData = Object.fromEntries(formData.entries());
 
-    const { data, error } = await authClient.signUp.email({
-      name: useData.name,
-      image: useData.image,
-      email: useData.email,
-      password: useData.password,
-    });
-
-    if (!error) {
-      router.push("/");
-    }
+    await authClient.signIn.email(
+      {
+        name: useData.name,
+        image: useData.image,
+        email: useData.email,
+        password: useData.password,
+        callbackURL: "/",
+      },
+      {
+        onSuccess: () => {
+          router.push("/");
+          router.refresh();
+        },
+        onError: (ctx) => {
+          alert(ctx.error.message);
+        },
+      },
+    );
   };
 
   return (

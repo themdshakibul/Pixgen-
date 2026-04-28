@@ -12,18 +12,33 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const LogingPage = () => {
+  const router = useRouter();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const useData = Object.fromEntries(formData.entries());
 
-    const { data, error } = await authClient.signIn.email({
-      email: useData.email,
-      password: useData.password,
-    });
+    await authClient.signIn.email(
+      {
+        email: useData.email,
+        password: useData.password,
+        callbackURL: "/",
+      },
+      {
+        onSuccess: () => {
+          router.push("/");
+          router.refresh();
+        },
+        onError: (ctx) => {
+          alert(ctx.error.message);
+        },
+      },
+    );
   };
 
   const hadelGoogleSignIn = async () => {
