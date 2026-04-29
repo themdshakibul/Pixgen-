@@ -2,8 +2,17 @@ import Category from "@/Components/Home/Category";
 import PhotCard from "@/Components/Shared/PhotCard";
 import { getTopGeneration } from "@/data/data";
 
-const AllPhotosPages = async () => {
+const AllPhotosPages = async ({ searchParams }) => {
+  const { category } = await searchParams;
+  console.log(category, "category page");
+
   const allPhotos = await getTopGeneration();
+
+  const filterPhotos = category
+    ? allPhotos.filter(
+        (photo) => photo.category.toLowerCase() == category.toLowerCase(),
+      )
+    : allPhotos;
 
   return (
     <section>
@@ -13,7 +22,7 @@ const AllPhotosPages = async () => {
           <Category />
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {allPhotos.map((photo) => (
+          {filterPhotos.map((photo) => (
             <PhotCard key={photo.id} photo={photo} />
           ))}
         </div>
